@@ -34,43 +34,45 @@ let userInput = prompt(menu)
 // Loops and continues to display the menu until the user ends/closes the Task Manager (Until the user enters CLOSE)
 while (userInput !== "CLOSE"){
 
-     showTasks = tasks
+     
     // CODE TO COMPLETE TASK MANAGER SHOULD BE WRITTEN HERE
-    if (userInput == `TASKS`){
+    if(userInput === "TASKS"){
         
-        alert(showTasks)
+        for(let i = 1; i < tasks.length; i++){
+            showTasks += `${i}: ${tasks[i - 1]}\n`;
+            
         }
+        
+        alert(`Here are the tasks: ${showTasks}`);
+        showTasks = ""; 
+    }
         else if (userInput === "NEW") {
             
             newTask = prompt(`Please enter the new task:`);
             
-            while (true) {
-              
-              if (newTask === "") {
-                
-                newTask = prompt(`Please enter the new task:`);
-              } else {
-                
-                break;
-              }
-            }
-            alert(`${newTask} has been added!`);
-    
-    tasks.push(newTask);
+            tasks.push(newTask);
 
-    } else if (userInput === `REMOVE`) {
-        while (true){
-            for (i = 0; i < tasks.length; i++){
-                showTasks = showTasks + `${i + 1}: ${tasks[i]}\n`
-            }
-            num = prompt(`Please enter a number to remove: \n${showTasks}`) -1
-            if (num >= 0 && num < tasks.length){
-                removed = tasks.splice(num,1)
-                alert(`${removed[0]} has been removed`)
-                showTasks = ``
-                break
-            }
+            alert(`${newTask} has been added!`);
         }
+    
+
+    if (userInput === `REMOVE`) {
+        
+        
+
+        for (i=0; i < tasks.length; i++){
+            showTasks += (i + 1 + `:` + tasks[i] + `\n`)        
+        }
+
+        num = prompt(`Please enter a number to remove:\n${showTasks}`)
+
+        removed = tasks[num - 1]
+
+        tasks.splice(num - 1, 1)
+
+        alert(`${removed} has been removed`)
+
+        showTasks = ``
     }
     // Displays the menu again
     userInput = prompt(menu)
